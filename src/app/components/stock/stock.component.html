@@ -1,0 +1,23 @@
+<div class="quote">
+  <ng-container *ngIf="company">
+    <h2>{{ company.description + " (" + company.symbol + ")" }}</h2>
+  </ng-container>
+  <div class="quote-details" *ngIf="quote | async as q">
+    <div class="information-container">
+      <p [ngClass]="{ 'negative-text': q.dp < 0, 'positive-text': q.dp > 0 }">
+        <span>Change today: </span>{{ (q.dp | number: "1.1-2") + "%" }}
+      </p>
+      <p><span>Current price: </span>{{ q.c | currency }}</p>
+      <p><span>Opening price: </span>{{ q.o | currency }}</p>
+      <p><span>High price: </span>{{ q.h | currency }}</p>
+    </div>
+    <div class="arrow-container">
+      <img *ngIf="q.dp > 0" src="assets/img/arrow-up.png" alt="arrow-up" />
+      <img *ngIf="q.dp < 0" src="assets/img/arrow-down.png" alt="arrow-down" />
+    </div>
+  </div>
+  <button (click)="showSentimentsPage()">Go to social sentiment details</button>
+  <div class="close-icon" (click)="removeStock()">
+    <img src="assets/icons/close-fill.svg" alt="close-icon" />
+  </div>
+</div>

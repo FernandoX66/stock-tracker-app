@@ -1,0 +1,73 @@
+@use "colors" as c;
+@use "mixins" as m;
+
+.quote {
+  position: relative;
+  box-shadow: 0px 0px 30px -4px rgb(0 0 0 / 10%);
+  background-color: c.$white;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 15px;
+
+  h2 {
+    font-size: 20px;
+    margin: 0 20px 20px 0;
+  }
+
+  .quote-details {
+    display: flex;
+    align-items: center;
+
+    .information-container {
+      flex: 5;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+
+      .negative-text {
+        color: red;
+      }
+
+      .positive-text {
+        color: green;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .arrow-container {
+      flex: 1;
+      display: flex;
+      text-align: center;
+      align-items: center;
+
+      img {
+        width: 64px;
+      }
+    }
+  }
+
+  button {
+    @include m.button;
+    width: 100%;
+    max-width: 230px;
+    padding: 10px 10px;
+    margin-top: 20px;
+  }
+}
+
+.close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  img {
+    width: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
