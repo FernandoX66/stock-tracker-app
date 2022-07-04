@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./stocks.component.scss'],
 })
 export class StocksComponent implements OnInit {
-  stockInput = new FormControl('', [Validators.pattern('^[A-Z]{1,5}$')]);
+  stockInput = new UntypedFormControl('', [Validators.pattern('^[A-Z]{1,5}$')]);
   stocks: string[] = [];
 
   constructor(private localStorageService: LocalStorageService) {}
@@ -20,8 +20,10 @@ export class StocksComponent implements OnInit {
   }
 
   trackStock(): void {
-    this.stocks.push(this.stockInput.value!);
-    this.localStorageService.setStocks(this.stocks);
+    if (this.stocks.indexOf(this.stockInput.value) === -1) {
+      this.stocks.push(this.stockInput.value);
+      this.localStorageService.setStocks(this.stocks);
+    }
     this.stockInput.reset();
   }
 

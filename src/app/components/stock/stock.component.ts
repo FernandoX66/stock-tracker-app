@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { map, mergeMap, Observable, of } from 'rxjs';
 import { QuoteData } from 'src/app/interfaces/quote.interface';
 import { Company } from 'src/app/interfaces/symbol-lookup-response.interface';
-import { NotificationService } from 'src/app/services/notification.service';
 import { StocksService } from 'src/app/services/stocks.service';
 
 @Component({
@@ -33,10 +32,6 @@ export class StockComponent {
         if (company) {
           this.company = company;
         } else {
-          this.notificationService.showNotification(
-            'Not found',
-            'No stock matching that symbol.'
-          );
           this.deleteStock.emit(symbol);
         }
       });
@@ -46,11 +41,7 @@ export class StockComponent {
   quote: Observable<QuoteData>;
   company: Company;
 
-  constructor(
-    private stocksService: StocksService,
-    private router: Router,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private stocksService: StocksService, private router: Router) {}
 
   removeStock(): void {
     this.deleteStock.emit(this.symbol);
