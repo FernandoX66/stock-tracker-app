@@ -1,0 +1,27 @@
+@use "colors" as c;
+
+$small-screen-width: 480px;
+
+@mixin button {
+  border: none;
+  font: {
+    family: inherit;
+    size: 14px;
+    weight: bold;
+  }
+  border-radius: 10px;
+  background-color: c.$blue;
+  color: c.$white;
+  box-shadow: 0px 0px 30px -4px rgb(39 82 224 / 15%);
+
+  &:hover {
+    cursor: pointer;
+    background-color: c.$blue-middle-light;
+  }
+}
+
+@mixin small-screen {
+  @media (max-width: $small-screen-width) {
+    @content;
+  }
+}
